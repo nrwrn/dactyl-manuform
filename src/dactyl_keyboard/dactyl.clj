@@ -1316,10 +1316,13 @@
 (def trrs-notch        (translate (map + usb-holder-position [-10.33 (+ 3.6 notch-offset) 6.6]) (cube 8.4 2.4 19.8)))
 
 ; Screw insert definition & position
-(defn screw-insert-shape [bottom-radius top-radius height]
-  (union
-   (->> (binding [*fn* 30]
-                 (cylinder [bottom-radius top-radius] height)))))
+;(defn screw-insert-shape [bottom-radius top-radius height]
+;  (union
+;   (->> (binding [*fn* 30]
+;                 (cylinder [bottom-radius top-radius] height)))))
+(defn screw-insert-shape [bottom-radius top-radius height] 
+   (union (cylinder [bottom-radius top-radius] height)
+          (translate [0 0 (/ height 2)] (sphere top-radius))))
 
 (defn screw-insert [column row bottom-radius top-radius height offset]
   (let [shift-right   (= column lastcol)
